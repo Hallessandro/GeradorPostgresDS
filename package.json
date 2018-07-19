@@ -1,0 +1,30 @@
+{
+  "name": "geradorpostgresds",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hallessandro/GeradorPostgresDS.git"
+  },
+  "keywords": [
+    "electron",
+    "postgresds",
+    "jboss"
+  ],
+  "author": "Hallessandro D´villa Jesus da Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hallessandro/GeradorPostgresDS/issues"
+  },
+  "homepage": "https://github.com/Hallessandro/GeradorPostgresDS#readme",
+  "devDependencies": {
+    "electron": "^2.0.5"
+  },
+  "dependencies": {
+    "bootstrap": "^4.1.2"
+  }
+}

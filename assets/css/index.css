@@ -1,0 +1,30 @@
+body {
+background-color: #F7F7F7;
+}
+.inputs-jboss {
+    padding-top: 1.5%;
+    display: flex; 
+    justify-content: center;
+}
+.divInputJboss {
+    display: flex; 
+    justify-content: center;
+}
+/* Classe dos inputs do Jboss */
+.inputJboss{
+    border-color: #9F9F9F;
+}
+
+.tipo-banco {
+    display: flex; 
+    justify-content: space-around; 
+}
+
+.informacos-banco {
+    padding-top: 2%;
+}
+/* Classe da div pai dos inputs de cliente e jboss */
+.dois-inputs-linha {
+    display: flex;
+    justify-content: space-between;
+}
