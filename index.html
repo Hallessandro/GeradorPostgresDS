@@ -10,26 +10,24 @@
 
 <body>
   <div class="container">
-    <p class="text-center">Gerador de Postgresds</p>
-    <div class="container-jboss-input">
-      <div class="row divInputJboss">
-        <div class="form-group col-6 inputs-jboss">
-          <input type="text" class="form-control inputJboss" id="inputJboss4" placeholder="Jboss 4">
-          <button class="btn btn-sm btn-warning disabled">Editar</button>
-          <button class="btn btn-sm btn-success">Salvar</button>
-        </div>
-      </div>
-      <div class="row divInputJboss">
-        <div class="form-group col-6 inputs-jboss">
-          <input type="text" class="form-control inputJboss" id="inputJboss5" placeholder="Jboss 5">
-          <button class="btn btn-sm btn-warning disabled">Editar</button>
-          <button class="btn btn-sm btn-success">Salvar</button>
-        </div>
-      </div>
-    </div>
-    <hr>
+    <p class="text-center h4 header-app">Gerador de Postgresds</p>
+    <br>
     <div class="content">
       <form id="form-dados">
+        <div class="form-group">
+          <div class="div-selecao-jboss">
+            <input type="text" class="form-control inputJboss" id="inputJboss" placeholder="Caminho do Jboss" disabled>            
+            <div class="input-group-prepend">
+               <div class="input-group-text label-buscar-jboss">
+                  <label for="pasta-jboss" id="label-pasta-jboss">Buscar</label>
+               </div>
+            </div>
+            <input type="file" id="pasta-jboss" onchange="onChangePasta()" class="inputfile" webkitdirectory />
+          </div>
+          <small id="folderHelper" class="form-text text-muted">
+              Aqui você deve escolher o diretório da pasta do cliente que deseja gerar o arquivo gerado
+          </small>
+        </div>
         <div class="form-group dois-inputs-linha">
           <select class="form-control" id="versaoJboss" onchange="selecionarVersaoJboss()">
             <option selected disabled value="0">--Selecione o Jboss--</option>
@@ -77,7 +75,6 @@
     <p id="erros"></p>
   </div>
   <script>
-    // You can also require other files to run in this process
     require('./renderer.js')
   </script>
   <script src="assets/js/index.js"></script>  

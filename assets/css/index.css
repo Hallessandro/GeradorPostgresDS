@@ -29,3 +29,25 @@ background-color: #F7F7F7;
     justify-content: space-between;
 }
 
+.header-app {
+    padding-top: 3%;
+}
+
+#pasta-jboss{
+    visibility: hidden;
+    width: 0%;
+    height: 0%;
+}
+
+.div-selecao-jboss {
+    display: flex;
+    justify-content: space-between;
+}
+
+.label-buscar-jboss{
+    display:  flex;
+    align-self: center;
+    background-color: #3b5998;
+    color: white;
+    padding-top: 15%;
+}
