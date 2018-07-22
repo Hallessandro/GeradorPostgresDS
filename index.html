@@ -29,44 +29,42 @@
     </div>
     <hr>
     <div class="content">
-      <form>
+      <form id="form-dados">
         <div class="form-group dois-inputs-linha">
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Jboss">
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Cliente" disabled>
+          <select class="form-control" id="versaoJboss" onchange="selecionarVersaoJboss()">
+            <option selected disabled value="0">--Selecione o Jboss--</option>
+            <option value="4">Jboss 4</option>
+            <option value="5">Jboss 5</option>
+           </select>
+          <input type="text" class="form-control" id="cliente" placeholder="Cliente" maxlength="10">
         </div>
-        <div class="input-group-text tipo-banco">
-          <div>
-            <input type="radio" id="huey" name="drone" checked />
-            <label for="huey">Preprod</label>
-          </div>
-          <div>
-            <input type="radio" id="huey" name="drone" checked />
-            <label for="huey">Bdrestauracao</label>
-          </div>
-          <div>
-            <input type="radio" id="huey" name="drone" checked />
-            <label for="huey">Outro</label>
-          </div>
+        <div class="form-group dois-inputs-linha">
+            <select class="form-control" id="servidor" onchange="populaCampos()">
+              <option selected disabled value="selecione">--Selecione o servidor--</option>
+              <option value="preprod">Preprod</option>
+              <option value="bdrestauracao">Bdrestauracao</option>
+              <option value="outro">Outro</option>
+             </select>
         </div>
         <div class="informacos-banco">
           <div class="form-group dois-inputs-linha">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Server Name">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Porta">
+                <input type="text" class="form-control" id="serverName" placeholder="Server Name">
+                <input type="text" class="form-control" id="porta" placeholder="Porta">
           </div>                     
           <div class="form-group dois-inputs-linha">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Banco Administrativo">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuário">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Senha">
+              <input type="text" class="form-control" id="bancoAdm" placeholder="Banco Administrativo">
+              <input type="text" class="form-control" id="usrAdm" placeholder="Usuário">
+              <input type="text" class="form-control" id="senhaAdm" placeholder="Senha">
           </div>          
           <div class="form-group dois-inputs-linha">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Banco Comum">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuário">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Senha">
+              <input type="text" class="form-control" id="bancoComum" placeholder="Banco Comum">
+              <input type="text" class="form-control" id="usrComum" placeholder="Usuário">
+              <input type="text" class="form-control" id="senhaComum" placeholder="Senha">
           </div>          
           <div class="form-group dois-inputs-linha">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Banco Sigaa">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuário">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Senha">
+              <input type="text" class="form-control" id="bancoSigaa" placeholder="Banco Sigaa">
+              <input type="text" class="form-control" id="usrSigaa" placeholder="Usuário">
+              <input type="text" class="form-control" id="senhaSigaa" placeholder="Senha">
           </div>        
         </div>
         <br>
@@ -75,11 +73,14 @@
         </div>
       </form>
     </div>
+    <br>
+    <p id="erros"></p>
   </div>
   <script>
     // You can also require other files to run in this process
     require('./renderer.js')
   </script>
+  <script src="assets/js/index.js"></script>  
 </body>
 
 </html>
