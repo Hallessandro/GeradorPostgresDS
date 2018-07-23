@@ -93,7 +93,7 @@ function populaCampos(){
     if(servidor.value === "preprod"){
         porta.value = "15432";
         bancoAdm.value = "preprod_administrativo"
-        bancoComum.value = "preprod_comum";
+        bancoComum.value = "preprod_sistemas_comum";
         bancoSigaa.value = "preprod_sigaa";
         if(cliente.value){
             serverName.value = cliente.value.toUpperCase();
