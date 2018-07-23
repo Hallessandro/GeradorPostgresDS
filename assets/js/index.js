@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 const $ = document.querySelector.bind(document);
 const CAMINHO_JBOSS_5 = "";
 const CAMINHO_JBOSS_4 = "";
@@ -28,10 +30,12 @@ document.querySelector("#form-dados").addEventListener("submit", function(event)
             serverName = "bdrestauracao";
         }
         let porta = $("#porta");
+        let pastaJboss = $("#pasta-jboss");
 
         let resultado = montarArquivo(bancoAdm.value, usrAdm.value, senhaAdm.value,bancoComum.value,
                 usrComum.value, senhaComum.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, serverName, porta.value);
         console.log(resultado);
+        gerarArquivo(resultado, pastaJboss.files[0].path);
     }
 });
 
@@ -55,8 +59,11 @@ function selecionarVersaoJboss(){
     }
 }
 
-function gerarArquivo(){
-    console.log("OK");
+function gerarArquivo(conteudo, caminho){
+    fs.writeFile(caminho, conteudo, (err) => {
+        if (err) throw err;
+        console.log('Deu bom!');
+    });
 }
 
 function populaCampos(){
