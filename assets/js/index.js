@@ -33,7 +33,7 @@ document.querySelector("#form-dados").addEventListener("submit", function(event)
         let pastaJboss = $("#pasta-jboss");
 
         let resultado = montarArquivo(bancoAdm.value, usrAdm.value, senhaAdm.value,bancoComum.value,
-                usrComum.value, senhaComum.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, serverName, porta.value, cliente.value.toLowerCase());
+                usrComum.value, senhaComum.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, serverName.toLowerCase(), porta.value, cliente.value.toLowerCase());
         console.log(resultado);
         gerarArquivo(resultado, pastaJboss.files[0].path);
     }
@@ -61,8 +61,14 @@ function selecionarVersaoJboss(){
 
 function gerarArquivo(conteudo, caminho){
     fs.writeFile(caminho, conteudo, (err) => {
-        if (err) throw err;
-        console.log('Deu bom!');
+        if (err) {            
+            res = '<div class="alert alert-danger" role="alert"> Deu ruim: ' + err +'</div>';
+            document.getElementById("erros").innerHTML = res;
+        }else {            
+            res = '<div class="alert alert-success" role="alert">Deu bom demais: Arquivo gerado com sucesso!</div>';
+            document.getElementById("erros").innerHTML = "Deu bom:";
+        }
+        
     });
 }
 
