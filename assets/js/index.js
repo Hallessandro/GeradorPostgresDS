@@ -33,7 +33,7 @@ document.querySelector("#form-dados").addEventListener("submit", function(event)
         let pastaJboss = $("#pasta-jboss");
 
         let resultado = montarArquivo(bancoAdm.value, usrAdm.value, senhaAdm.value,bancoComum.value,
-                usrComum.value, senhaComum.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, serverName, porta.value);
+                usrComum.value, senhaComum.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, serverName, porta.value, cliente.value.toLowerCase());
         console.log(resultado);
         gerarArquivo(resultado, pastaJboss.files[0].path);
     }
@@ -85,7 +85,7 @@ function populaCampos(){
     let cliente = $("#cliente");
 
     if(servidor.value === "preprod"){
-        porta.value = "25432";
+        porta.value = "15432";
         bancoAdm.value = "preprod_administrativo"
         bancoComum.value = "preprod_comum";
         bancoSigaa.value = "preprod_sigaa";
@@ -107,8 +107,8 @@ function populaCampos(){
     if(servidor.value === "preprod" || servidor.value === "bdrestauracao"){
         usrAdm.value = "sipac"; 
         senhaAdm.value = "sipac";
-        usrComum.value = "comum";
-        senhaComum.value = "comum";
+        usrComum.value = "comum_user";
+        senhaComum.value = "comum_user";
         usrSigaa.value = "sigaa";
         senhaSigaa.value = "sigaa";
     }else {
