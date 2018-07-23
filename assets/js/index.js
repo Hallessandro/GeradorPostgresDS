@@ -32,8 +32,8 @@ document.querySelector("#form-dados").addEventListener("submit", function(event)
         let porta = $("#porta");
         let pastaJboss = $("#pasta-jboss");
 
-        let resultado = montarArquivo(bancoAdm.value, usrAdm.value, senhaAdm.value,bancoComum.value,
-                usrComum.value, senhaComum.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, serverName.toLowerCase(), porta.value, cliente.value.toLowerCase());
+        let resultado = montarArquivo(bancoAdm.value, usrAdm.value, senhaAdm.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, 
+                bancoComum.value, usrComum.value, senhaComum.value, serverName.toLowerCase(), porta.value, cliente.value.toLowerCase());
         console.log(resultado);
         gerarArquivo(resultado, pastaJboss.files[0].path);
     }
