@@ -5,11 +5,34 @@ var caminho_final = "";
 
 document.querySelector("#form-dados").addEventListener("submit", function(event){
     event.preventDefault();
-    validaCampos();
-});
+    let val = validaCampos();
+    if(val){
+        let bancoAdm = $("#bancoAdm");
+        let usrAdm = $("#usrAdm");
+        let senhaAdm = $("#senhaAdm");
 
-document.querySelector("#form-jboss").addEventListener("submit", function(event){
-    event.preventDefault();
+        let bancoComum = $("#bancoComum");
+        let usrComum = $("#usrComum");
+        let senhaComum = $("#senhaComum");
+
+        let bancoSigaa = $("#bancoSigaa");
+        let usrSigaa = $("#usrSigaa");
+        let senhaSigaa = $("#senhaSigaa");        
+
+        let servidor = $("#servidor");
+        let serverName = "";
+        if(servidor.value === "preprod"){
+            let cliente = $("#cliente");
+            serverName = cliente.value; 
+        }else if (servidor.value === "bdrestauracao"){
+            serverName = "bdrestauracao";
+        }
+        let porta = $("#porta");
+
+        let resultado = montarArquivo(bancoAdm.value, usrAdm.value, senhaAdm.value,bancoComum.value,
+                usrComum.value, senhaComum.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, serverName, porta.value);
+        console.log(resultado);
+    }
 });
 
 function onChangePasta(){
@@ -94,8 +117,7 @@ function populaCampos(){
 function validaCampos(){
     let versao = $("#versaoJboss");    
     let cliente = $("#cliente");
-    let servidor = $("#servidor");
-    let cliente = $("cliente");
+    let servidor = $("#servidor");    
     let erros = [];
     if(!versao.value || versao.value === "0"){
         erros.push("Jboss: Campo obrigatório não informado!");
@@ -114,6 +136,9 @@ function validaCampos(){
         }
         resultado += "</ul>";
         document.getElementById("erros").innerHTML = resultado;
+        return false;
+    }else{
+        return true;
     }
 }
 
