@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require("path");
 var app = require('electron').remote; 
 var dialog = app.dialog;
+const shell = require('electron').shell;
 
 const $ = document.querySelector.bind(document);
 const CAMINHO_JBOSS_5 = "";
@@ -162,5 +163,9 @@ function validaCampos(){
     }else{
         return true;
     }
+}
+
+function levarParaBlog(){
+    shell.openExternal("http://hallessandro.github.io");
 }
 
