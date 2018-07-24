@@ -14,29 +14,8 @@
     <br>
     <div class="content">
       <form id="form-dados">
-        <div class="form-group">
-          <div class="div-selecao-jboss">
-            <input type="text" class="form-control inputJboss" id="inputJboss" placeholder="Caminho do Jboss" disabled>            
-            <div class="input-group-prepend">
-               <div class="input-group-text label-buscar-jboss">
-                  <label for="pasta-jboss" id="label-pasta-jboss">Buscar</label>
-               </div>
-            </div>
-            <input type="file" id="pasta-jboss" onchange="onChangePasta()" class="inputfile" webkitdirectory />
-          </div>
-          <small id="folderHelper" class="form-text text-muted">
-              Aqui você deve escolher o diretório da pasta do cliente que deseja gerar o arquivo gerado
-          </small>
-        </div>
         <div class="form-group dois-inputs-linha">
-          <select class="form-control" id="versaoJboss" onchange="selecionarVersaoJboss()">
-            <option selected disabled value="0">--Selecione o Jboss--</option>
-            <option value="4">Jboss 4</option>
-            <option value="5">Jboss 5</option>
-           </select>
           <input type="text" class="form-control" id="cliente" placeholder="Cliente" maxlength="10">
-        </div>
-        <div class="form-group dois-inputs-linha">
             <select class="form-control" id="servidor" onchange="populaCampos()">
               <option selected disabled value="selecione">--Selecione o servidor--</option>
               <option value="preprod">Preprod</option>
@@ -44,6 +23,15 @@
               <option value="outro">Outro</option>
              </select>
         </div>
+        <!--
+        <div class="form-group dois-inputs-linha">
+          <select class="form-control" id="versaoJboss" onchange="selecionarVersaoJboss()">
+            <option selected disabled value="0">--Selecione o Jboss--</option>
+            <option value="4">Jboss 4</option>
+            <option value="5">Jboss 5</option>
+           </select>
+        </div>
+        -->
         <div class="informacos-banco">
           <div class="form-group dois-inputs-linha">
                 <input type="text" class="form-control" id="serverName" placeholder="Server Name">
