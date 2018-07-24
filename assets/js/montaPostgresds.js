@@ -1,7 +1,6 @@
 function montarArquivo(bancoAdm, senhaAdm, usuarioAdm, bancoSigaa, senhaSigaa, usuarioSigaa, 
         bancoComum, senhaComum, usuarioComum, serverName, porta, cliente){
-        const arquivo = `
-<?xml version="1.0" encoding="UTF-8"?>
+        const arquivo = `<?xml version="1.0" encoding="UTF-8"?>
 <!-- ===================================================================== -->
 <!--                                                                       -->
 <!--  JBoss Server Configuration                                           -->
