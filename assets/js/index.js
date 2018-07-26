@@ -3,6 +3,7 @@ var path = require("path");
 var app = require('electron').remote; 
 var dialog = app.dialog;
 const shell = require('electron').shell;
+const {BrowserWindow} = require('electron').remote
 
 const $ = document.querySelector.bind(document);
 const CAMINHO_JBOSS_5 = "";
@@ -13,35 +14,55 @@ document.querySelector("#form-dados").addEventListener("submit", function(event)
     event.preventDefault();
     let val = validaCampos();
     if(val){
-        let bancoAdm = $("#bancoAdm");
-        let usrAdm = $("#usrAdm");
-        let senhaAdm = $("#senhaAdm");
-
-        let bancoComum = $("#bancoComum");
-        let usrComum = $("#usrComum");
-        let senhaComum = $("#senhaComum");
-
-        let bancoSigaa = $("#bancoSigaa");
-        let usrSigaa = $("#usrSigaa");
-        let senhaSigaa = $("#senhaSigaa");        
-
-        let servidor = $("#servidor");
-        let serverName = "";
-        if(servidor.value === "preprod"){
-            let cliente = $("#cliente");
-            serverName = cliente.value; 
-        }else if (servidor.value === "bdrestauracao"){
-            serverName = "bdrestauracao";
-        }
-        let porta = $("#porta");
-        let pastaJboss = $("#pasta-jboss");
-
-        let resultado = montarArquivo(bancoAdm.value, usrAdm.value, senhaAdm.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, 
-                bancoComum.value, usrComum.value, senhaComum.value, serverName.toLowerCase(), porta.value, cliente.value.toLowerCase());
-        console.log(resultado);
+        let resultado = salvarResultado();
         gerarArquivo(resultado);
     }
 });
+
+function salvarResultado(){
+    let bancoAdm = $("#bancoAdm");
+    let usrAdm = $("#usrAdm");
+    let senhaAdm = $("#senhaAdm");
+
+    let bancoComum = $("#bancoComum");
+    let usrComum = $("#usrComum");
+    let senhaComum = $("#senhaComum");
+
+    let bancoSigaa = $("#bancoSigaa");
+    let usrSigaa = $("#usrSigaa");
+    let senhaSigaa = $("#senhaSigaa");        
+
+    let servidor = $("#servidor");
+    let serverName = "";
+    if(servidor.value === "preprod"){
+        let cliente = $("#cliente");
+        serverName = cliente.value; 
+    }else if (servidor.value === "bdrestauracao"){
+        serverName = "bdrestauracao";
+    }
+    let porta = $("#porta");
+    let pastaJboss = $("#pasta-jboss");
+
+    let resultado = montarArquivo(bancoAdm.value, usrAdm.value, senhaAdm.value, bancoSigaa.value, usrSigaa.value, senhaSigaa.value, 
+            bancoComum.value, usrComum.value, senhaComum.value, serverName.toLowerCase(), porta.value, cliente.value.toLowerCase());
+    return resultado; 
+}
+
+//Exibe o modal com o resultado em
+const btnGerarEmTela = document.getElementById('btn-exibir-em-tela')
+
+btnGerarEmTela.addEventListener('click', (event) => {
+  let val = validaCampos();
+  if(val){
+    let resultado = salvarResultado();
+    gerarArquivo(resultado);
+  }
+  let win = new BrowserWindow({ frame: false })
+
+  win.on('close', () => { win = null })
+  win.loadFile("pages/resultadoTela.html")
+  win.show()
+})
 
 function onChangePasta(){
     let pastaJboss = $("#pasta-jboss");
