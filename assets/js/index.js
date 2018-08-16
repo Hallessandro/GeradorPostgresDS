@@ -1,14 +1,11 @@
+const $ = document.querySelector.bind(document);
+const { Client } = require('pg');
 var fs = require('fs');
 var path = require("path");
 var app = require('electron').remote; 
 var dialog = app.dialog;
 const shell = require('electron').shell;
-const {BrowserWindow} = require('electron').remote
-
-const $ = document.querySelector.bind(document);
-const CAMINHO_JBOSS_5 = "";
-const CAMINHO_JBOSS_4 = "";
-var caminho_final = "";
+const {BrowserWindow} = require('electron').remote;
 
 document.querySelector("#form-dados").addEventListener("submit", function(event){
     event.preventDefault();
@@ -75,15 +72,6 @@ function popularCampos(){
     populaCampos();
 }
 
-function selecionarVersaoJboss(){
-    let versao = $("#versaoJboss");    
-    if(versao.value === "4"){
-      caminho_final = CAMINHO_JBOSS_4 + "teste";
-    }else {
-        caminho_final = CAMINHO_JBOSS_5 + "teste";
-    }
-}
-
 function gerarArquivo(conteudo){
     filename = 'teste.xml';
     // You can obviously give a direct path without use the dialog (C:/Program Files/path/myfileexample.txt)
@@ -108,21 +96,29 @@ function populaCampos(){
     let servidor = $("#servidor");
     let porta = $("#porta");
 
-    let bancoAdm = $("#bancoAdm");
     let usrAdm = $("#usrAdm");
     let senhaAdm = $("#senhaAdm");
-
-    let bancoComum = $("#bancoComum");
+    
     let usrComum = $("#usrComum");
     let senhaComum = $("#senhaComum");
-
-    let bancoSigaa = $("#bancoSigaa");
+    
     let usrSigaa = $("#usrSigaa");
     let senhaSigaa = $("#senhaSigaa");
 
     let cliente = $("#cliente");
+    
+    let _elementoSigaa = $(".input-sigaa");
+    let _elementoComum = $(".input-comum");
+    let _elementoAdm = $(".input-adm");
 
     if(servidor.value === "preprod"){
+        _elementoAdm.innerHTML = `<input type="text" class="form-control" id="bancoAdm" placeholder="Banco Administrativo">`
+        _elementoComum.innerHTML = `<input type="text" class="form-control" id="bancoComum" placeholder="Banco Sigaa">`
+        _elementoSigaa.innerHTML = `<input type="text" class="form-control" id="bancoSigaa" placeholder="Banco Sigaa">`
+
+        let bancoAdm = $("#bancoAdm");
+        let bancoComum = $("#bancoComum");
+        let bancoSigaa = $("#bancoSigaa");
         porta.value = "15432";
         bancoAdm.value = "preprod_administrativo"
         bancoComum.value = "preprod_sistemas_comum";
@@ -133,11 +129,45 @@ function populaCampos(){
             serverName.value = "";
         }
     }else if(servidor.value === "bdrestauracao"){
+        const client = new Client({
+            user: 'sipac',
+            host: 'bdrestauracao',
+            database: 'postgres',
+            password: 'sipac',
+            port: 5432,
+        })
         porta.value = "5432";
-        bancoAdm.value = cliente.value.toLowerCase() + "_administrativo_2018";
-        bancoComum.value = cliente.value.toLowerCase() + "_sistemas_comum_2018";
-        bancoSigaa.value = cliente.value.toLowerCase() + "_sigaa_2018";
         serverName.value = "bdrestauracao";
+        var listaAdm = []; 
+        var listaSigaa = [];
+        var listaComum = [];
+
+        client.connect()
+        client.query(`SELECT datname FROM pg_database where datname ilike '${cliente.value}_%' order by datname desc;`)
+            .then(res => {
+                resultados = res.rows; 
+                for (r in resultados){
+                    if(resultados[r].datname.includes('administrativo')){
+                        listaAdm.push(resultados[r].datname);
+                    }else if(resultados[r].datname.includes("sistemas_comum")){
+                        listaComum.push(resultados[r].datname);
+                    }else if(resultados[r].datname.includes("sigaa")){
+                        listaSigaa.push(resultados[r].datname)
+                    }
+                }
+                client.end();
+
+                _elementoSigaa.innerHTML = montaSelect(listaSigaa, 'Sigaa');
+                _elementoComum.innerHTML = montaSelect(listaComum, 'Comum');
+                _elementoAdm.innerHTML = montaSelect(listaAdm, 'Adm'); 
+                
+            })
+            .catch((err) => { 
+                bancoAdm.value = cliente.value.toLowerCase() + "_administrativo_2018";
+                client.end();
+            });            
+            bancoComum.value = cliente.value.toLowerCase() + "_sistemas_comum_2018";
+            bancoSigaa.value = cliente.value.toLowerCase() + "_sigaa_2018";
     }else {
         porta.value = "";
         bancoAdm.value = ""
@@ -190,3 +220,17 @@ function levarParaBlog(){
     shell.openExternal("http://hallessandro.github.io");
 }
 
+function montaSelect(lista, banco){
+    return `
+    <div>
+    <select class="form-control" id="banco${banco}">
+        <option selected disabled>--SELECIONE--</option>
+        ${lista.map(banco => 
+        `
+        <option value="${banco}">${banco}</option>
+        `
+        )}
+    </select>
+    </div>
+    `;
+}
