@@ -6,6 +6,8 @@ var app = require('electron').remote;
 var dialog = app.dialog;
 const shell = require('electron').shell;
 const {BrowserWindow} = require('electron').remote;
+var nedb = require('nedb');
+var db = new nedb({filename: 'banco.db', autoload: true});
 
 document.querySelector("#form-dados").addEventListener("submit", function(event){
     event.preventDefault();
@@ -234,3 +236,28 @@ function montaSelect(lista, banco){
     </div>
     `;
 }
+
+function carregaServidores(){
+    db.find({}, function (err, res) {
+        if(err)return console.log(err);        
+        geraSelectServidores(res);
+    });
+}
+
+function geraSelectServidores(lista){
+    resultado = `
+    <div>
+    <select class="form-control" id="servidor" onchange="populaCampos()">
+        <option selected disabled>--SELECIONE--</option>
+        ${lista.map(res => 
+        `
+        <option value="${res._id}">${res.servidor}</option>
+        `
+        )}
+    </select>
+    </div>
+    `;
+    document.getElementById("div-server").innerHTML = resultado;
+}
+
+carregaServidores();

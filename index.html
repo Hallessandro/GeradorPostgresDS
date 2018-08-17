@@ -16,12 +16,7 @@
       <form id="form-dados">
         <div class="form-group dois-inputs-linha">
           <input type="text" class="form-control" id="cliente" placeholder="Cliente" maxlength="10">
-            <select class="form-control" id="servidor" onchange="populaCampos()">
-              <option selected disabled value="selecione">--Selecione o servidor--</option>
-              <option value="preprod">Preprod</option>
-              <option value="bdrestauracao">Bdrestauracao</option>
-              <option value="outro">Outro</option>
-             </select>
+          <div id="div-server"></div>
         </div>
         <!--
         <div class="form-group dois-inputs-linha">
