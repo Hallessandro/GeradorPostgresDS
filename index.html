@@ -16,47 +16,46 @@
       <form id="form-dados">
         <div class="form-group dois-inputs-linha">
           <input type="text" class="form-control" id="cliente" placeholder="Cliente" maxlength="10">
-          <div id="div-server"></div>
+          <div class="input-group">
+              <select class="form-control" id="servidor" onchange="populaCampos()">
+                  <option selected disabled value="0">--Selecione o servidor--</option>
+                  <option value="preprod">Preprod</option>
+                  <option value="bdrestauracao">Bdrestauracao</option>
+              </select>          
+              <div class="input-group-prepend">
+                <div class="input-group-text"><a href="#" id="linkAddServidor">+</a></div>
+              </div>
+          </div>
         </div>
-        <!--
-        <div class="form-group dois-inputs-linha">
-          <select class="form-control" id="versaoJboss" onchange="selecionarVersaoJboss()">
-            <option selected disabled value="0">--Selecione o Jboss--</option>
-            <option value="4">Jboss 4</option>
-            <option value="5">Jboss 5</option>
-           </select>
-        </div>
-        -->
         <div class="informacos-banco">
           <div class="form-group dois-inputs-linha">
                 <input type="text" class="form-control" id="serverName" placeholder="Server Name">
                 <input type="text" class="form-control" id="porta" placeholder="Porta">
           </div>                     
+          <div class="input-adm form-group">
+            <input type="text" class="form-control" id="bancoAdm" placeholder="Banco Administrativo">
+          </div>
           <div class="form-group dois-inputs-linha">
-              <div class="input-adm">
-                <input type="text" class="form-control" id="bancoAdm" placeholder="Banco Administrativo">
-              </div>
               <input type="text" class="form-control" id="usrAdm" placeholder="Usuário">
               <input type="text" class="form-control" id="senhaAdm" placeholder="Senha">
           </div>          
+          <div class="input-comum form-group">
+            <input type="text" class="form-control" id="bancoComum" placeholder="Banco Comum">
+          </div>
           <div class="form-group dois-inputs-linha">
-              <div class="input-comum">
-                <input type="text" class="form-control" id="bancoComum" placeholder="Banco Comum">
-              </div>
               <input type="text" class="form-control" id="usrComum" placeholder="Usuário">
               <input type="text" class="form-control" id="senhaComum" placeholder="Senha">
           </div>          
+          <div class="input-sigaa form-group">
+            <input type="text" class="form-control" id="bancoSigaa" placeholder="Banco Sigaa">
+          </div>
           <div class="form-group dois-inputs-linha">
-              <div class="input-sigaa">
-                <input type="text" class="form-control" id="bancoSigaa" placeholder="Banco Sigaa">
-              </div>
               <input type="text" class="form-control" id="usrSigaa" placeholder="Usuário">
               <input type="text" class="form-control" id="senhaSigaa" placeholder="Senha">
           </div>        
         </div>
         <br>
         <div class="inputs-jboss">
-            <button type="button" class="btn btn-dark" id="btn-exibir-em-tela">Exibir na tela</button>
           <button type="submit" class="btn btn-primary">Gerar Arquivo</button>
         </div>
       </form>
@@ -65,13 +64,14 @@
     <p id="erros"></p>
   </div>
   <div class="footer">
-    <p>Desenvolvido por <a href="#" onclick="levarParaBlog()">Hallessandro D´villa</a> - Versão 1.0.3 </p>
+    <p>Desenvolvido por <a href="#" onclick="levarParaBlog()">Hallessandro D´villa</a> - Versão 1.1 </p>
   </div>
   <script>
     require('./renderer.js')
   </script>
   <script src="assets/js/index.js"></script>  
   <script src="assets/js/montaPostgresds.js"></script>  
+  <script src="assets/js/cadastroServidor.js"></script>  
 </body>
 
 </html>

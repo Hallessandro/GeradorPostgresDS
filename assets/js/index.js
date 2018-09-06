@@ -17,7 +17,13 @@ document.querySelector("#form-dados").addEventListener("submit", function(event)
         gerarArquivo(resultado);
     }
 });
-
+$('#linkAddServidor').addEventListener('click', (event) => {
+    let win = new BrowserWindow({ width: 400, height: 320 })
+  
+    win.on('close', () => { win = null })
+    win.loadFile("pages/cadastroServidor.html")
+    win.show()
+});
 function salvarResultado(){
     let bancoAdm = $("#bancoAdm");
     let usrAdm = $("#usrAdm");
@@ -89,7 +95,7 @@ function gerarArquivo(conteudo){
                 alert("Deu ruim: "+ err.message)
             }
                         
-            alert("O arquivo foi salvo com sucesso!");
+            alert("Deu bom: Arquivo gerado com sucesso!");
         });
     }); 
 }
@@ -114,7 +120,7 @@ function populaCampos(){
     let _elementoAdm = $(".input-adm");
 
     if(servidor.value === "preprod"){
-        _elementoAdm.innerHTML = `<input type="text" class="form-control" id="bancoAdm" placeholder="Banco Administrativo">`
+        _elementoAdm.innerHTML = `<input type="text" class="form-control col-6" id="bancoAdm" placeholder="Banco Administrativo">`
         _elementoComum.innerHTML = `<input type="text" class="form-control" id="bancoComum" placeholder="Banco Sigaa">`
         _elementoSigaa.innerHTML = `<input type="text" class="form-control" id="bancoSigaa" placeholder="Banco Sigaa">`
 

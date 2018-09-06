@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de servidor</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body>
+ <div class="container">
+     <form>
+         <h4>Informações</h4>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Nome</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Porta</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Server name</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+        </div>
+        <hr>
+        <h4>Bancos</h4>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Administrativo</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+        </div>
+        <hr>
+        <h4>Senhas</h4>
+    </form>
+ </div>
+  <script>
+    require('./renderer.js')
+  </script>
+  <script src="assets/js/index.js"></script>  
+  <script src="assets/js/montaPostgresds.js"></script>  
+  <script src="assets/js/cadastroServidor.js"></script>  
+</body>
+
+</html>
